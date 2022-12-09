@@ -1,0 +1,8 @@
+name: Shamrock
+type: module
+description: Misc Shamrock modules dumped here until a home is chosen.
+package: Shamrock
+core: 8.x
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - webform:webform
