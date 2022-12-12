@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Plugin\WebformElement\Textarea;
 
 /**
- * Provides a 'campaign' element.
+ * Provides a 'sales' element.
  *
  * @WebformElement(
  *   id = "sales",
