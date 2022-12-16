@@ -2,12 +2,9 @@
 namespace Drupal\shamrock\Plugin\WebformHandler;
 
 use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\webform\Annotation\WebformHandler;
 use Drupal\webform\Plugin\WebformHandlerBase;
-use Drupal\webform\WebformSubmissionConditionsValidatorInterface;
 use Drupal\webform\WebformSubmissionInterface;
 
 /**
