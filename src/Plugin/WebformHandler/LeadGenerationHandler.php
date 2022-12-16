@@ -2,7 +2,6 @@
 namespace Drupal\shamrock\Plugin\WebformHandler;
 
 use Drupal\Core\Annotation\Translation;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\webform\Annotation\WebformHandler;
 use Drupal\webform\Plugin\WebformHandlerBase;
 use Drupal\webform\WebformSubmissionInterface;
@@ -29,38 +28,15 @@ class LeadGenerationHandler extends WebformHandlerBase {
    */
   public function preSave(WebformSubmissionInterface $webform_submission) {
     $data = $webform_submission->getData();
+    $form = $this->getWebform();
+    $elements = $form->getElementsInitialized();
     foreach($data as $key => $val) {
       if (preg_match('/^\[.*:.*\]$/', $val)) {
-        $form = $this->getWebform();
-        $elements = $form->getElementsInitialized();
         $new_val = (@$elements[$key]['#replacement_value']) ?: '';
         $data[$key] = $new_val;
       }
     }
     $webform_submission->setData($data);
-  }
-
-  /**
-   * @param array $form
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *
-   * @return array
-   */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $form['trigger'] = [
-        '#type' => 'fieldset',
-        '#title' => $this->t('Trigger'),
-    ];
-    $form['trigger']['execute'] = [
-      '#type' => 'radios',
-      '#title' => $this->t('Execute'),
-      '#options' => [
-        'before' => '..before submission data is saved',
-        'after' => '..after submission data is saved'
-      ],
-    ];
-
-    return $form;
   }
 
 }
