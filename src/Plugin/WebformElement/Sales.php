@@ -29,8 +29,7 @@ class Sales extends Textarea {
       return strpos($access_key, 'access_') === 0;
     }, ARRAY_FILTER_USE_BOTH);
 
-    return [
-        // Element settings.
+    return [        // Element settings.
         'title' => '',
         'default_value' => '',
         'replacement_value' => '',
