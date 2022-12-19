@@ -22,20 +22,31 @@ use Drupal\webform\WebformSubmissionInterface;
 class LeadGenerationHandler extends WebformHandlerBase {
 
   /**
+   * Handler for our Lead generations utilizing the Sales field type.
    * @param \Drupal\webform\WebformSubmissionInterface $webform_submission
    *
    * @return void
    */
   public function preSave(WebformSubmissionInterface $webform_submission) {
+    // Get the webform submission data.
     $data = $webform_submission->getData();
+    // Get the form.
     $form = $this->getWebform();
+    // Get the elements and their structure.
     $elements = $form->getElementsInitialized();
+    // Loop through data and get key and values.
     foreach($data as $key => $val) {
+      // Check reg ex for a token.
       if (preg_match('/^\[.*:.*\]$/', $val)) {
+        // Assign new value if the regex matched with the
+        // replacement_value field in the Sales field type
+        // or give it an empty string.
         $new_val = (@$elements[$key]['#replacement_value']) ?: '';
+        // Assign the new value to the form.
         $data[$key] = $new_val;
       }
     }
+    // Save the new data to the form.
     $webform_submission->setData($data);
   }
 
